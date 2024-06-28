@@ -11,7 +11,7 @@ export type Product = {
 	brand: string;
 	sku: string;
 	weight: number;
-	dimensions: string;
+	dimensions: Dimensions;
 	warrantyInformation: string;
 	shippingInformation: string;
 	availibilityStatus: string;
@@ -21,4 +21,10 @@ export type Product = {
 	meta: string;
 	thumbnail: string;
 	images: string[];
+};
+
+export type Dimensions = {
+	width: number;
+	height: number;
+	depth: number;
 };
