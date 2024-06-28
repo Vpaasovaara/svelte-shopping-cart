@@ -15,10 +15,10 @@ export type Product = {
 	warrantyInformation: string;
 	shippingInformation: string;
 	availibilityStatus: string;
-	reviews: string[];
+	reviews: Review[];
 	returnPolicy: string;
 	minimumOrderQuantity: number;
-	meta: string;
+	meta: Meta;
 	thumbnail: string;
 	images: string[];
 };
@@ -35,4 +35,11 @@ export type Review = {
 	date: string;
 	reviewerName: string;
 	reviewerEmail: string;
+};
+
+export type Meta = {
+	createdAt: string;
+	updatedAt: string;
+	barcode: string;
+	qrCode: string;
 };
