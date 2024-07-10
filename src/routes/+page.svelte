@@ -9,12 +9,17 @@
 	let cartOpen = $state(false);
 	let cartProducts = $state<CartProduct[]>([]);
 
-	const cartQuantity = $derived.by(() => {
+	const cartStats = $derived.by(() => {
+		let quantity = 0;
 		let total = 0;
 		for (const product of cartProducts) {
+			quantity += product.quantity;
 			total += product.quantity;
 		}
-		return total;
+		return {
+			quantity,
+			total
+		};
 	});
 
 	function removeFromCart(id: string) {
@@ -30,7 +35,7 @@
 			class="flex items-center rounded-full bg-sky-600 px-4 py-2 text-white hover:bg-sky-700"
 		>
 			<ShoppingCart class="mr-2 size-5" />
-			<span>Cart ({cartQuantity})</span>
+			<span>Cart ({cartStats.quantity})</span>
 		</button>
 		{#if cartOpen}
 			<div class="absolute right-0 top-8 z-10 mt-2 w-80 rounded-lg bg-white shadow-xl">
@@ -47,7 +52,7 @@
 						<CartItem bind:cartProduct={cartProducts[i]} removeItem={removeFromCart} />
 					{/each}
 					<div class="mt-4 border-gray-200 pt-4">
-						<p class="text-lg font-semibold">Total: $39.98</p>
+						<p class="text-lg font-semibold">Total: {cartStats.total.toFixed(2)}</p>
 					</div>
 				</div>
 			</div>
