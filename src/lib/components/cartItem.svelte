@@ -6,9 +6,10 @@
 
 	type Props = {
 		cartProduct: CartProduct;
+		removeItem: (id: string) => void;
 	};
 
-	let { cartProduct = $bindable() }: Props = $props();
+	let { cartProduct = $bindable(), removeItem }: Props = $props();
 </script>
 
 <div class="flex items-center justify-between py-2 border-b border-gray-200">
@@ -27,7 +28,13 @@
 		<button
 			class="p-1 hover:bg-gray-200 rounded"
 			aria-label="Subtract 1 from quantity"
-			onclick={() => cartProduct.quantity--}
+			onclick={() => {
+				if (cartProduct.quantity === 1) {
+					removeItem(cartProduct.id);
+				} else {
+					cartProduct.quantity--;
+				}
+			}}
 		>
 			<Minus class="size-4" />
 		</button>
@@ -39,7 +46,10 @@
 		>
 			<Plus class="size-4" />
 		</button>
-		<button class="ml-4 p-1 text-red-500 hover:bg-red-100 rounded">
+		<button
+			onclick={() => removeItem(cartProduct.id)}
+			class="ml-4 p-1 text-red-500 hover:bg-red-100 rounded"
+		>
 			<Trash class="size-4" />
 		</button>
 	</div>
