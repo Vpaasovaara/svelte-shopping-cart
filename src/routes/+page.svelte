@@ -39,8 +39,8 @@
 					>
 						<X class="size-4" />
 					</button>
-					{#each cartProducts as cartProduct}
-						<CartItem {cartProduct} />
+					{#each cartProducts as _, i}
+						<CartItem bind:cartProduct={cartProducts[i]} />
 					{/each}
 					<div class="mt-4 border-gray-200 pt-4">
 						<p class="text-lg font-semibold">Total: $39.98</p>
